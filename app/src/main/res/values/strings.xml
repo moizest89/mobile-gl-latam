@@ -2,18 +2,5 @@
     <string name="app_name">Mobile-Gl-Latam</string>
     <string name="menu_action_about_project">About Project</string>
 
-    <!-- Source: https://material.io/design/typography/#typography-roboto   -->
-    <dimen name="material_text_button">14sp</dimen>
-    <dimen name="material_text_menu">14sp</dimen>
-    <dimen name="material_text_caption">12sp</dimen>
-    <dimen name="material_text_body1">14sp</dimen>
-    <dimen name="material_text_body2">13sp</dimen>
-    <dimen name="material_text_subhead">16sp</dimen>
-    <dimen name="material_text_title">20sp</dimen>
-    <dimen name="material_text_headline">24sp</dimen>
-    <dimen name="material_text_display1">34sp</dimen>
-    <dimen name="material_text_display2">45sp</dimen>
-    <dimen name="material_text_display3">56sp</dimen>
-    <dimen name="material_text_display4">112sp</dimen>
 
 </resources>
