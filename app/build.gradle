@@ -51,6 +51,8 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.ext.NAVIGATION.UI_KTX"
     implementation "androidx.navigation:navigation-fragment:$rootProject.ext.NAVIGATION.FRAGMENT"
     implementation "androidx.navigation:navigation-ui:$rootProject.ext.NAVIGATION.UI"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.LEGACY_SUPPORT"
+    implementation "androidx.legacy:legacy-support-v13:$rootProject.ext.LEGACY_SUPPORT"
 
     //Third libraries
     implementation 'com.github.bumptech.glide:glide:3.7.0'
