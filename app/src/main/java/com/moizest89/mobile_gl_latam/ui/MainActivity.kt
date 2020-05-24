@@ -7,13 +7,17 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.moizest89.mobile_gl_latam.R
+import com.moizest89.mobile_gl_latam.common.onAlphaAnimation
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel : MainViewModel by lazy { ViewModelProvider( this ).get( MainViewModel::class.java ) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,9 +25,18 @@ class MainActivity : AppCompatActivity() {
 
         //resources.configuration.orientation returns 1 for Portrait and 2 for landscape
         val mAdapter = MainAdapter( resources.configuration.orientation )
-        this.recyclerViewMainData.layoutManager = GridLayoutManager( this, resources.configuration.orientation )
+        this.recyclerViewMainData.layoutManager = GridLayoutManager( this, getGridSpanByOrientation( resources.configuration.orientation ) )
         this.recyclerViewMainData.adapter = mAdapter
-        
+
+        viewModel.dataItems.observe( this , Observer {
+            it?.let {
+                mAdapter.list = it
+                mAdapter.notifyDataSetChanged()
+                swipeRefreshMainList.onAlphaAnimation( 1.0f )
+                progressBar.onAlphaAnimation( 0.0f )
+            }
+        })
+        viewModel.loadDataItems()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -39,6 +52,13 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.menu_action_about_project -> true
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun getGridSpanByOrientation( orientation : Int ) : Int {
+        return when( orientation ){
+            2 -> 3
+            else -> orientation
         }
     }
 }
