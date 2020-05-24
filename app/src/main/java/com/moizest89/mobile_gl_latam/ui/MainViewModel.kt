@@ -10,13 +10,17 @@ class MainViewModel : ViewModel() {
 
     val dataItems = MutableLiveData< MutableList< DataModelItem > >()
 
-    fun loadDataItems(){
+    fun loadDataItems( reloadData : Boolean = false){
         Log.e("MainViewModel", "dataItems.value ${dataItems.value}")
-        dataItems.value?.let {
-            if( it.isEmpty() ){
+        if( !reloadData) {
+            dataItems.value?.let {
+                if (it.isEmpty()) {
+                    dataItems.value = getDataDummy()
+                }
+            } ?: kotlin.run {
                 dataItems.value = getDataDummy()
             }
-        }?: kotlin.run {
+        }else{
             dataItems.value = getDataDummy()
         }
     }
@@ -25,6 +29,7 @@ class MainViewModel : ViewModel() {
         val dummyData = mutableListOf< DataModelItem >()
         repeat( 20 ){
             dummyData.add( DataModelItem(
+                image = "https://picsum.photos/200/200?image=1",
                 title = "Title No $it" ,
                 description = "In hac habitasse platea dictumst. Aliquam mi erat, fermentum non nisi non, congue dictum velit. Suspendisse hendrerit velit at vulputate suscipit. Nunc in erat vestibulum, lacinia neque vel, molestie arcu. Proin vestibulum sagittis mauris, eu consequat neque imperdiet non. Donec feugiat viverra quam, sit amet pulvinar justo accumsan sed. Praesent gravida eros in libero facilisis, quis molestie nisl interdum. Ut gravida vel felis quis rutrum. Mauris accumsan lacus et sem efficitur, in mattis sem lacinia")
             )

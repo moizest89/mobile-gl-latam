@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.moizest89.mobile_gl_latam.R
+import com.moizest89.mobile_gl_latam.common.setImageFromUrl
 import com.moizest89.mobile_gl_latam.data.DataModelItem
 
 class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter< MainAdapter.Holder >(){
@@ -15,6 +16,7 @@ class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter< Main
     var list : MutableList<DataModelItem> = mutableListOf()
     private val ORIENTATION_LANDSCAPE = 2
     private val ORIENTATION_PORTRAIT = 1
+    val mListener : OnItemClickListener? = null
 
     //True for landscape and false for portrait
     private val orientationLand : Boolean = false
@@ -32,15 +34,23 @@ class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter< Main
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val itemList = list[ position ]
-
         holder.textViewTitle.text = itemList.title
         holder.textViewDescription.text = itemList.description
+        holder.imageView.setImageFromUrl( itemList.image )
+
+        holder.itemView.setOnClickListener {
+            mListener?.itemClickListener( position , itemList )
+        }
     }
 
     inner class Holder( itemView: View ): RecyclerView.ViewHolder( itemView ){
         var imageView = itemView.findViewById< ImageView >( R.id.imageView )
         var textViewTitle = itemView.findViewById< TextView >( R.id.textViewTitle )
         var textViewDescription = itemView.findViewById< TextView >( R.id.textViewDescription )
+    }
+
+    interface OnItemClickListener{
+        fun itemClickListener( position: Int , dataItem : DataModelItem )
     }
 
 }

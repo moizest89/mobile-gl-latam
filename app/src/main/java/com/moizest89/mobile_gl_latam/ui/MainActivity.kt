@@ -12,10 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.moizest89.mobile_gl_latam.R
 import com.moizest89.mobile_gl_latam.common.onAlphaAnimation
+import com.moizest89.mobile_gl_latam.data.DataModelItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener{
 
     private val viewModel : MainViewModel by lazy { ViewModelProvider( this ).get( MainViewModel::class.java ) }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,11 +33,19 @@ class MainActivity : AppCompatActivity() {
             it?.let {
                 mAdapter.list = it
                 mAdapter.notifyDataSetChanged()
+
                 swipeRefreshMainList.onAlphaAnimation( 1.0f )
                 progressBar.onAlphaAnimation( 0.0f )
+
+                if(swipeRefreshMainList.isRefreshing) swipeRefreshMainList.isRefreshing = false
             }
         })
+
         viewModel.loadDataItems()
+
+        swipeRefreshMainList.setOnRefreshListener {
+            viewModel.loadDataItems( true )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -60,5 +69,9 @@ class MainActivity : AppCompatActivity() {
             2 -> 3
             else -> orientation
         }
+    }
+
+    override fun itemClickListener(position: Int, dataItem: DataModelItem) {
+
     }
 }
