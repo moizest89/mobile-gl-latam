@@ -1,6 +1,5 @@
-package com.moizest89.mobile_gl_latam.ui
+package com.moizest89.mobile_gl_latam.ui.main
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,12 @@ import com.moizest89.mobile_gl_latam.R
 import com.moizest89.mobile_gl_latam.common.setImageFromUrl
 import com.moizest89.mobile_gl_latam.data.DataModelItem
 
-class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter< MainAdapter.Holder >(){
+class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter<MainAdapter.Holder>(){
 
     var list : MutableList<DataModelItem> = mutableListOf()
     private val ORIENTATION_LANDSCAPE = 2
     private val ORIENTATION_PORTRAIT = 1
-    val mListener : OnItemClickListener? = null
+    var mListener : OnItemClickListener? = null
 
     //True for landscape and false for portrait
     private val orientationLand : Boolean = false

@@ -1,9 +1,7 @@
-package com.moizest89.mobile_gl_latam.ui
+package com.moizest89.mobile_gl_latam.ui.main
 
-import android.app.Activity
-import android.content.res.Configuration
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -11,12 +9,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.moizest89.mobile_gl_latam.R
+import com.moizest89.mobile_gl_latam.common.Config
 import com.moizest89.mobile_gl_latam.common.onAlphaAnimation
 import com.moizest89.mobile_gl_latam.data.DataModelItem
+import com.moizest89.mobile_gl_latam.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener{
+class MainActivity : AppCompatActivity() ,
+    MainAdapter.OnItemClickListener {
 
     private val viewModel : MainViewModel by lazy { ViewModelProvider( this ).get( MainViewModel::class.java ) }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener{
         setSupportActionBar(toolbar)
 
         //resources.configuration.orientation returns 1 for Portrait and 2 for landscape
-        val mAdapter = MainAdapter( resources.configuration.orientation )
+        val mAdapter = MainAdapter(resources.configuration.orientation)
+        mAdapter.mListener = this@MainActivity
         this.recyclerViewMainData.layoutManager = GridLayoutManager( this, getGridSpanByOrientation( resources.configuration.orientation ) )
         this.recyclerViewMainData.adapter = mAdapter
 
@@ -73,5 +75,9 @@ class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener{
 
     override fun itemClickListener(position: Int, dataItem: DataModelItem) {
 
+        Intent( this@MainActivity , DetailsActivity::class.java ).also {
+            it.putExtra( Config.INTENT_MAIN_DATA , dataItem )
+            startActivity( it )
+        }
     }
 }

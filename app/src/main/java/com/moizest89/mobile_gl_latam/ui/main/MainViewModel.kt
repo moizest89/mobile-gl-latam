@@ -1,9 +1,8 @@
-package com.moizest89.mobile_gl_latam.ui
+package com.moizest89.mobile_gl_latam.ui.main
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.moizest89.mobile_gl_latam.common.LiveDataResource
 import com.moizest89.mobile_gl_latam.data.DataModelItem
 
 class MainViewModel : ViewModel() {
