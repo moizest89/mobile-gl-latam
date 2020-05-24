@@ -1,12 +1,16 @@
 package com.moizest89.mobile_gl_latam.ui
 
+import android.app.Activity
+import android.content.res.Configuration
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import com.moizest89.mobile_gl_latam.R
-
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +19,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        //resources.configuration.orientation returns 1 for Portrait and 2 for landscape
+        val mAdapter = MainAdapter( resources.configuration.orientation )
+        this.recyclerViewMainData.layoutManager = GridLayoutManager( this, resources.configuration.orientation )
+        this.recyclerViewMainData.adapter = mAdapter
+        
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
