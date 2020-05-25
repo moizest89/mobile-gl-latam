@@ -29,6 +29,7 @@ class DetailsActivity : AppCompatActivity() {
             textViewDescription.text = dataModelItem.description
         }
 
+
         this.app_bar.onCollapseListener( findViewById( R.id.toolbar_layout ) ){
              circleImageView.onAlphaAnimation( if( it ) 1.0f else 0.0f )
         }

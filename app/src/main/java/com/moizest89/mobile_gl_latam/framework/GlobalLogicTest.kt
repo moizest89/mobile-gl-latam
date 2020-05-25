@@ -4,6 +4,7 @@ import android.app.Application
 
 class GlobalLogicTest() : Application(){
 
+    //Manual DI for inject components
     val appContainer : GlobalLogicContainer by lazy { GlobalLogicContainer( this ) }
 
     override fun onCreate() {
