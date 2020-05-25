@@ -2,10 +2,13 @@ package com.moizest89.mobile_gl_latam.presentation.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -90,7 +93,10 @@ class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.menu_action_about_project -> true
+            R.id.menu_action_about_project -> {
+                aboutProjectDialog()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -114,5 +120,14 @@ class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener {
             it.putExtra( Config.INTENT_MAIN_DATA , dataItem )
             startActivity( it )
         }
+    }
+
+    private fun aboutProjectDialog(){
+        val dialog = AlertDialog.Builder( this )
+            .setMessage( R.string.message_about_project )
+            .setPositiveButton( android.R.string.ok ){ dialog,_ ->
+                dialog.dismiss()
+            }.show()
+        dialog.findViewById<TextView>(android.R.id.message)?.movementMethod = LinkMovementMethod.getInstance()
     }
 }
