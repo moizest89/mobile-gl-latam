@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() ,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        this.toolbar.title = ""
+        this.title = ""
         setSupportActionBar(toolbar)
 
         //resources.configuration.orientation returns 1 for Portrait and 2 for landscape

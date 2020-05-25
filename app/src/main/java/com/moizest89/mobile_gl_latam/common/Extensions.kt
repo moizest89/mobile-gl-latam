@@ -3,11 +3,14 @@ package com.moizest89.mobile_gl_latam.common
 import android.animation.Animator
 import android.view.View
 import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import com.bumptech.glide.Glide
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.moizest89.mobile_gl_latam.R
 
 fun View.onAlphaAnimation(alpha : Float,
-                          duration : Long = 800,
+                          duration : Long = 600,
                           onAnimationEnd : ((View, Animator? ) -> Unit )? = null,
                           onAnimationStart : (( View , Animator? ) -> Unit)? = null ) : View{
 
@@ -37,4 +40,11 @@ fun ImageView.setImageFromUrl( imageUrl : String? , placeHolder : Int = R.drawab
         .into(this)
 
     return this
+}
+
+fun AppBarLayout.onCollapseListener(toolbarLayout: CollapsingToolbarLayout, onReturn : (isVisible : Boolean ) -> Unit) {
+    this.addOnOffsetChangedListener( AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+        onReturn( ( toolbarLayout.height + verticalOffset < 2 * ViewCompat.getMinimumHeight(toolbarLayout) ) )
+    })
+
 }
