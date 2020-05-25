@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -53,8 +54,8 @@ class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener {
                 progressBar.visibility = View.GONE
             }?.onLoading {
                 swipeRefreshMainList.isRefreshing = true
-                swipeRefreshMainList.visibility = View.GONE
-                progressBar.visibility = View.VISIBLE
+                if(!swipeRefreshMainList.isVisible) swipeRefreshMainList.visibility = View.GONE
+                if( progressBar.isVisible ) progressBar.visibility = View.VISIBLE
                 linearLayoutFailureMessage.visibility = View.GONE
             }?.onFailure {
                 swipeRefreshMainList.isRefreshing = false
