@@ -2,12 +2,19 @@
 
 # Mobile Technical Interview
 
-##Goal
+## Goal
 
-Create an app that shows a simple list of items based on the following endpoint:http://private-f0eea-mobilegllatam.apiary-mock.com/listThe app should show the following data :
-* Title (at its full length, so take this into account when sizing your cells)* Part of description* A thumbnail for those who have a picture.* Display a detail (with an image and full description) in a new screen when usertaps on an item
+Create an app that shows a simple list of items based on the following endpoint:
+http://private-f0eea-mobilegllatam.apiary-mock.com/list
+The app should show the following data :
 
-##Result
+* Title (at its full length, so take this into account when sizing your cells)
+* Part of description
+* A thumbnail for those who have a picture.
+* Display a detail (with an image and full description) in a new screen when user
+taps on an item
+
+## Result
 
 |   ![screne_1](https://raw.githubusercontent.com/moizest89/mobile-gl-latam/develop/screens/splash.png) |   ![screen_2](https://raw.githubusercontent.com/moizest89/mobile-gl-latam/develop/screens/main_list.png)  |
 |:---|:---|
@@ -46,7 +53,7 @@ CORE_KTX = '1.2.0'
 CIRCLE_IMAGEVIEW = '3.1.0'
 ```
 
-##In summary:
+## In summary:
 
 *  The application was developed with Kotlin like main language
 *  Basic MVVM implementation for show information
