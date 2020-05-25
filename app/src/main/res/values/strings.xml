@@ -1,19 +1,10 @@
 <resources>
     <string name="app_name">Mobile-Gl-Latam</string>
     <string name="menu_action_about_project">About Project</string>
-
-    <!-- Source: https://material.io/design/typography/#typography-roboto   -->
-    <dimen name="material_text_button">14sp</dimen>
-    <dimen name="material_text_menu">14sp</dimen>
-    <dimen name="material_text_caption">12sp</dimen>
-    <dimen name="material_text_body1">14sp</dimen>
-    <dimen name="material_text_body2">13sp</dimen>
-    <dimen name="material_text_subhead">16sp</dimen>
-    <dimen name="material_text_title">20sp</dimen>
-    <dimen name="material_text_headline">24sp</dimen>
-    <dimen name="material_text_display1">34sp</dimen>
-    <dimen name="material_text_display2">45sp</dimen>
-    <dimen name="material_text_display3">56sp</dimen>
-    <dimen name="material_text_display4">112sp</dimen>
-
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="error_failure_message">Sorry, something went wrong.</string>
+    <string name="error_failure_button_label">Try Again</string>
+    <string name="message_about_project" >"This is a Mobile Technical Interview application developed by <a href="https://www.linkedin.com/in/moizest89/">@moizest89</a> for Sr. Android Developer position in <a href="https://www.globallogic.com">Global Logic</a>.
+To get more information, please, read README.md file in root project on <a href="https://github.com/moizest89/mobile-gl-latam">GitHub.</a>"</string>
 </resources>
