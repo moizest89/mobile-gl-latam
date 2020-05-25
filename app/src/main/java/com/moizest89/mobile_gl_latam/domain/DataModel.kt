@@ -1,4 +1,4 @@
-package com.moizest89.mobile_gl_latam.data
+package com.moizest89.mobile_gl_latam.domain
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize

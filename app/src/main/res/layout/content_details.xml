@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.details.DetailsActivity"
+    tools:context=".presentation.details.DetailsActivity"
     tools:showIn="@layout/activity_details">
 
     <LinearLayout
@@ -30,7 +30,6 @@
             android:id="@+id/textViewDescription"
             tools:text="@tools:sample/lorem/random"
             android:textStyle="normal"
-            android:text="@string/large_text"
             android:layout_marginStart="@dimen/standard_mid_margin"
             android:layout_marginEnd="@dimen/standard_mid_margin"
             android:layout_marginBottom="@dimen/standard_mid_margin"

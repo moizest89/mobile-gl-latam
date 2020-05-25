@@ -1,4 +1,4 @@
-package com.moizest89.mobile_gl_latam.ui.main
+package com.moizest89.mobile_gl_latam.presentation.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,19 +8,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.moizest89.mobile_gl_latam.R
 import com.moizest89.mobile_gl_latam.common.setImageFromUrl
-import com.moizest89.mobile_gl_latam.data.DataModelItem
+import com.moizest89.mobile_gl_latam.domain.DataModelItem
 
-class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter<MainAdapter.Holder>(){
+class MainAdapter( private val mOrientation : Int , private var mListener : OnItemClickListener  ) : RecyclerView.Adapter<MainAdapter.Holder>(){
 
     var list : MutableList<DataModelItem> = mutableListOf()
     private val ORIENTATION_LANDSCAPE = 2
     private val ORIENTATION_PORTRAIT = 1
-    var mListener : OnItemClickListener? = null
 
     //True for landscape and false for portrait
     private val orientationLand : Boolean = false
 
 
+    /** The constructor gets the current view orientation and the following method
+     * determine which one layout will render in RecyclerView
+     * */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return when(mOrientation){
             ORIENTATION_LANDSCAPE -> Holder( LayoutInflater.from( parent.context ).inflate( R.layout.item_main_list_row_land , parent, false ) )
@@ -38,7 +40,7 @@ class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter<MainA
         holder.imageView.setImageFromUrl( itemList.image )
 
         holder.itemView.setOnClickListener {
-            mListener?.itemClickListener( position , itemList )
+            mListener.itemClickListener( position , itemList )
         }
     }
 
@@ -49,7 +51,7 @@ class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter<MainA
     }
 
     interface OnItemClickListener{
-        fun itemClickListener( position: Int , dataItem : DataModelItem )
+        fun itemClickListener( position: Int , dataItem : DataModelItem)
     }
 
 }
