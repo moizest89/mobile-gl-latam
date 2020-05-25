@@ -30,7 +30,6 @@
             android:id="@+id/textViewDescription"
             tools:text="@tools:sample/lorem/random"
             android:textStyle="normal"
-            android:text="@string/large_text"
             android:layout_marginStart="@dimen/standard_mid_margin"
             android:layout_marginEnd="@dimen/standard_mid_margin"
             android:layout_marginBottom="@dimen/standard_mid_margin"

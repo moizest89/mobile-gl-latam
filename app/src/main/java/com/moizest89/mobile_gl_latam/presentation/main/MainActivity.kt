@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener {
 
         viewModel.items.observe( this, Observer { dataResource ->
             dataResource?.onSuccess { items ->
-                Log.e("MainActivity" , "onSuccess $items")
                 swipeRefreshMainList.isRefreshing = false
                 mAdapter.list = items
                 mAdapter.notifyDataSetChanged()
@@ -49,15 +48,21 @@ class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener {
                 swipeRefreshMainList.isRefreshing = true
                 swipeRefreshMainList.visibility = View.GONE
                 progressBar.visibility = View.VISIBLE
+                linearLayoutFailureMessage.visibility = View.GONE
             }?.onFailure {
                 swipeRefreshMainList.isRefreshing = false
                 swipeRefreshMainList.visibility = View.GONE
                 progressBar.visibility = View.VISIBLE
+                linearLayoutFailureMessage.visibility = View.VISIBLE
             }
         })
 
-        viewModel.getDataItems( )
+//        viewModel.getDataItems( )
         swipeRefreshMainList.setOnRefreshListener {
+            viewModel.getDataItems( true )
+        }
+
+        this.materialButtonErrorData.setOnClickListener {
             viewModel.getDataItems( true )
         }
 
