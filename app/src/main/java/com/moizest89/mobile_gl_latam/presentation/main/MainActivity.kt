@@ -1,9 +1,11 @@
-package com.moizest89.mobile_gl_latam.ui.main
+package com.moizest89.mobile_gl_latam.presentation.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,15 +13,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.moizest89.mobile_gl_latam.R
 import com.moizest89.mobile_gl_latam.common.Config
 import com.moizest89.mobile_gl_latam.common.onAlphaAnimation
-import com.moizest89.mobile_gl_latam.data.DataModelItem
-import com.moizest89.mobile_gl_latam.ui.details.DetailsActivity
+import com.moizest89.mobile_gl_latam.domain.DataModelItem
+import com.moizest89.mobile_gl_latam.framework.GlobalLogicTest
+import com.moizest89.mobile_gl_latam.presentation.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity() ,
-    MainAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity() , MainAdapter.OnItemClickListener {
 
-    private val viewModel : MainViewModel by lazy { ViewModelProvider( this ).get( MainViewModel::class.java ) }
+    private val viewModel : MainViewModel by lazy {
+        ViewModelProvider( this , MainViewModelFactory( (this.applicationContext as GlobalLogicTest).appContainer.itemtRepository )).get( MainViewModel::class.java )
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,23 +37,30 @@ class MainActivity : AppCompatActivity() ,
         this.recyclerViewMainData.layoutManager = GridLayoutManager( this, getGridSpanByOrientation( resources.configuration.orientation ) )
         this.recyclerViewMainData.adapter = mAdapter
 
-        viewModel.dataItems.observe( this , Observer {
-            it?.let {
-                mAdapter.list = it
+        viewModel.items.observe( this, Observer { dataResource ->
+            dataResource?.onSuccess { items ->
+                Log.e("MainActivity" , "onSuccess $items")
+                swipeRefreshMainList.isRefreshing = false
+                mAdapter.list = items
                 mAdapter.notifyDataSetChanged()
-
-                swipeRefreshMainList.onAlphaAnimation( 1.0f )
-                progressBar.onAlphaAnimation( 0.0f )
-
-                if(swipeRefreshMainList.isRefreshing) swipeRefreshMainList.isRefreshing = false
+                swipeRefreshMainList.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+            }?.onLoading {
+                swipeRefreshMainList.isRefreshing = true
+                swipeRefreshMainList.visibility = View.GONE
+                progressBar.visibility = View.VISIBLE
+            }?.onFailure {
+                swipeRefreshMainList.isRefreshing = false
+                swipeRefreshMainList.visibility = View.GONE
+                progressBar.visibility = View.VISIBLE
             }
         })
 
-        viewModel.loadDataItems()
-
+        viewModel.getDataItems( )
         swipeRefreshMainList.setOnRefreshListener {
-            viewModel.loadDataItems( true )
+            viewModel.getDataItems( true )
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -4,7 +4,7 @@ sealed class LiveDataResource< out T> {
 
     data class Success< out T >( val data: T ) : LiveDataResource<T>()
     data class Loading< out T >( val  partialData : T? = null) : LiveDataResource<T>()
-    data class Failure< out T >( val error: Any ) : LiveDataResource<T>()
+    data class Failure< out T >( val error: Throwable? ) : LiveDataResource<T>()
 
     val extractData: T? get() = when (this) {
         is Success -> data
@@ -26,7 +26,7 @@ sealed class LiveDataResource< out T> {
         return this
     }
 
-    fun onFailure( onFailure: ( dataError: Any?) -> Unit) : LiveDataResource<T> {
+    fun onFailure( onFailure: ( dataError: Throwable?) -> Unit) : LiveDataResource<T> {
         if (this is Failure)
             onFailure.invoke( error )
 

@@ -1,4 +1,4 @@
-package com.moizest89.mobile_gl_latam.ui.main
+package com.moizest89.mobile_gl_latam.presentation.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.moizest89.mobile_gl_latam.R
 import com.moizest89.mobile_gl_latam.common.setImageFromUrl
-import com.moizest89.mobile_gl_latam.data.DataModelItem
+import com.moizest89.mobile_gl_latam.domain.DataModelItem
 
 class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter<MainAdapter.Holder>(){
 
@@ -49,7 +49,7 @@ class MainAdapter( private val mOrientation : Int ) : RecyclerView.Adapter<MainA
     }
 
     interface OnItemClickListener{
-        fun itemClickListener( position: Int , dataItem : DataModelItem )
+        fun itemClickListener( position: Int , dataItem : DataModelItem)
     }
 
 }

@@ -1,9 +1,7 @@
-package com.moizest89.mobile_gl_latam.ui.details
+package com.moizest89.mobile_gl_latam.presentation.details
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.moizest89.mobile_gl_latam.R
@@ -11,7 +9,7 @@ import com.moizest89.mobile_gl_latam.common.Config
 import com.moizest89.mobile_gl_latam.common.onAlphaAnimation
 import com.moizest89.mobile_gl_latam.common.onCollapseListener
 import com.moizest89.mobile_gl_latam.common.setImageFromUrl
-import com.moizest89.mobile_gl_latam.data.DataModelItem
+import com.moizest89.mobile_gl_latam.domain.DataModelItem
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.content_details.*
 
@@ -25,14 +23,13 @@ class DetailsActivity : AppCompatActivity() {
         this.toolbar.title = ""
         setSupportActionBar(toolbar)
 
-        intent?.getParcelableExtra< DataModelItem >( Config.INTENT_MAIN_DATA)?.let { dataModelItem ->
+        intent?.getParcelableExtra<DataModelItem>( Config.INTENT_MAIN_DATA)?.let { dataModelItem ->
             imageViewHeader.setImageFromUrl( dataModelItem.image )
             textViewTitle.text = dataModelItem.title
             textViewDescription.text = dataModelItem.description
         }
 
         this.app_bar.onCollapseListener( findViewById( R.id.toolbar_layout ) ){
-//            if( it ) circleImageView.onAlphaAnimation( 1.0f ) else circleImageView.onAlphaAnimation( 0.0f )
              circleImageView.onAlphaAnimation( if( it ) 1.0f else 0.0f )
         }
 
