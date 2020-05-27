@@ -16,6 +16,8 @@ taps on an item
 
 ## Result
 
+To test the final result you can download [APK](https://github.com/moizest89/mobile-gl-latam/raw/develop/app/debug/app-debug.apk) 
+
 |   ![screne_1](https://raw.githubusercontent.com/moizest89/mobile-gl-latam/develop/screens/splash.png) |   ![screen_2](https://raw.githubusercontent.com/moizest89/mobile-gl-latam/develop/screens/main_list.png)  |
 |:---|:---|
 |    |    |
